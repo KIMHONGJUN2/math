@@ -30,3 +30,11 @@ times(1,2)
 
 # 함수 생성 확인
 print(globals())
+
+#리스트 안에서 for 를 포함하여 실행하기
+a =[1,2,3,4]
+result = []
+for num in a:
+    result.append(num*3)
+
+print(result)
