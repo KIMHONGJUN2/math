@@ -38,3 +38,30 @@ for num in a:
     result.append(num*3)
 
 print(result)
+
+#리스트 연산하기
+clr_names = ['red','green', 'gold']
+type(clr_names)
+
+#0부터 시작할 위치를 지정하여 값 추가
+clr_names.insert(1,'black')
+print(clr_names)
+
+#튜플 만들기
+t = (1,2,3)
+type(t)
+a,b = 1,2
+(a,b) = (1,2)
+print(a,b)
+
+
+a= set((1,2,3))
+type(a)
+print(1 in a)
+
+#딕셔너리 만들기 (인덱스 지원 x)
+d = dict(a=1,b=3,c=5)
+#세트안에서 키-값 구조를 이용해 딕셔너리 생성
+clr_names = {"apple":"red", "banana":"yellow"}
+print(clr_names["apple"])
+
