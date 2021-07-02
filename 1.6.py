@@ -1,3 +1,4 @@
+import numpy as np
 friend = 1
 type(friend)
 
@@ -65,3 +66,15 @@ d = dict(a=1,b=3,c=5)
 clr_names = {"apple":"red", "banana":"yellow"}
 print(clr_names["apple"])
 
+
+#numpy 사용
+a= np.array([0,1,2,3,4,5])
+a.ndim
+
+a.dtype
+print(a>4)
+
+#행렬 표현
+A = np.asmatrix([[3,2,4],[0,4,0],[0,0,5]])
+B = np.asmatrix([[5,0,0],[3,1,0],[0,2,1]])
+print(A-B)
