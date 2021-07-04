@@ -45,3 +45,4 @@ print(v)
 l1,l2 = la
 print(v[:,0])
 print(v[:,1])
+
