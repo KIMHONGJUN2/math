@@ -55,8 +55,8 @@ del x  # 변수 삭제제
 x= None  # 빈 변수 만들기
 
 # 6.3 input 함수
-x = input()
-print(x)
+# x = input()
+# print(x)
 
 # a = input('첫 번째 숫자를 입력하세요')
 # b = input('두 번째 숫자를 입력하세요')
@@ -72,5 +72,21 @@ print(x)
 # print(b)
 
 # map을 사용하여 정수로 변환
-a,b = map(int,input('숫자를 두 개 입력하세요').split())
-print(a+b)
+# a,b = map(int,input('숫자를 두 개 입력하세요').split())
+# print(a+b)
+
+# 7.1 값을 여러 개 출력하기
+# print(1,2,3)
+# print(1,2,3, sep=', ') # sep에 콤마와 공백 지정
+# print(1,2,3, sep='\n') # 줄바꿈
+# print('1\n2\n3')
+#
+# print(1,end=' ') # end 에는 \n 이 지정된 상태인데 빈 문자열을 지정하면 강제로 \n을 지워줌
+# print(2,end=' ')
+# year, month, day, hour, minute, second = input().split()
+#
+# print(year,month,day,sep='-',end='T')
+# print(hour, minute, second, sep=':')
+
+print(1,2,3,sep='-')
+print(1,2,3)
