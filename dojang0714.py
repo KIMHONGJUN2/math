@@ -7,7 +7,15 @@ print(not True)   # not and or 순으로 판단
 print(10 == 10 and 10 !=5 )
 print(False or 'python')
 
-a,b,c,d = map(int,input().split())
-print(a>=90 and b>80 and c>85 and d>=80)
 
 # 9. 문자열 사용하기
+hello = '''hello, world!
+안녕하세요.
+python 입니다.'''
+print(hello)
+
+s = ''''Python' is a "programming language"
+that lets you work quickly
+and
+integrate systems more effectively.'''
+print(s)
