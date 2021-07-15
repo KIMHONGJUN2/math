@@ -30,3 +30,23 @@ else:
 
     else :
         print('불합격')
+
+
+# 15. elif 문
+button = int(input())
+
+if button == 1:
+    print('콜라')
+elif button == 2:
+    print('사이다')
+elif button == 3:
+    print('환타')
+else:
+    print('제공하지 않는 메뉴')
+# ------------ 15 문제  1
+# if 7 <= age <= 12:
+#     balance -=650
+# elif 13 <= age <=18:
+#     balance -=1050
+# else:
+#     balance -= 1250
