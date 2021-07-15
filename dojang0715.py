@@ -21,28 +21,28 @@ if x==10 :
 # print(a)
 
 #14. else
-q,w,e,r = map(int,input().split())
-if 0>q or q>100 or 0>r or r>100 or 0>e or e>100 or 0>w or w>100:
-    print('잘못된 점수')
-else:
-    if (q+w+e+r)/4 >=80:
-        print('합격')
-
-    else :
-        print('불합격')
+# q,w,e,r = map(int,input().split())
+# if 0>q or q>100 or 0>r or r>100 or 0>e or e>100 or 0>w or w>100:
+#     print('잘못된 점수')
+# else:
+#     if (q+w+e+r)/4 >=80:
+#         print('합격')
+#
+#     else :
+#         print('불합격')
 
 
 # 15. elif 문
-button = int(input())
-
-if button == 1:
-    print('콜라')
-elif button == 2:
-    print('사이다')
-elif button == 3:
-    print('환타')
-else:
-    print('제공하지 않는 메뉴')
+# button = int(input())
+#
+# if button == 1:
+#     print('콜라')
+# elif button == 2:
+#     print('사이다')
+# elif button == 3:
+#     print('환타')
+# else:
+#     print('제공하지 않는 메뉴')
 # ------------ 15 문제  1
 # if 7 <= age <= 12:
 #     balance -=650
@@ -50,3 +50,12 @@ else:
 #     balance -=1050
 # else:
 #     balance -= 1250
+
+# 16 for와 range
+# for i in range(0, 10, 2):    # 0부터 8까지 2씩 증가
+#      print('Hello, world!', i)
+
+# 16 문제 1
+n = int(input())
+for i in range(1,10):
+    print(n,'*',  i ,'=' , n*i)
