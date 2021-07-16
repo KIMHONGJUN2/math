@@ -15,8 +15,25 @@ while i != 3:  # 3이 아닐 때 계속 반복
 
 
 # TODO 17 문제1
-a = int(input())
-while a >= 1350:
-    a -= 1350
-    print(a)
+# a = int(input())
+# while a >= 1350:
+#     a -= 1350
+#     print(a)
+#
+# #18 break 문
+# for i in range(10):    # 10번 반복
+#     pass               # 아무 일도 하지 않음
 
+start, stop = map(int, input().split())
+
+i = start
+
+# TODO 18 문제 1
+while True:
+    if i > stop:
+        break
+    elif i % 10 ==3:
+        i += 1
+        continue
+    print(i, end=' ')
+    i += 1
