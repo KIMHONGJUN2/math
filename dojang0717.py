@@ -136,27 +136,52 @@ from pprint import pprint
 # b = copy.deepcopy(a) # 다차원 리스트는 deepcopy 이용
 
 # TODO 23 심사 문제 -------     ☆☆☆☆☆다시 보기☆☆☆☆☆ = 지뢰찾기
-row,col = map(int,input().split())
-matrix = []
-for i in range(row):
-    matrix.append(list(input()))
-for i in range(row):
-    for j in range(col):
+# row,col = map(int,input().split())
+# matrix = []
+# for i in range(row):
+#     matrix.append(list(input()))
+# for i in range(row):
+#     for j in range(col):
+#
+#         if matrix[i][j] == '*':
+#             continue
+#         else:
+#             matrix[i][j]=int(0)
+# for i in range(row):
+#     for j in range(col):
+#         for y in range(i-1,i+2):
+#             for x in range(j-1,j+2):
+#                 if y<0 or x<0 or y >= row or x >= col:
+#                     pass
+#                 elif matrix[i][j] != '*' and matrix[y][x] == '*':
+#                     matrix[i][j] +=1
+# for i in range(row):
+#     for j in range(col):
+#         print(matrix[i][j],end='')
+#     print()
 
-        if matrix[i][j] == '*':
-            continue
-        else:
-            matrix[i][j]=int(0)
-for i in range(row):
-    for j in range(col):
-        for y in range(i-1,i+2):
-            for x in range(j-1,j+2):
-                if y<0 or x<0 or y >= row or x >= col:
-                    pass
-                elif matrix[i][j] != '*' and matrix[y][x] == '*':
-                    matrix[i][j] +=1
-for i in range(row):
-    for j in range(col):
-        print(matrix[i][j],end='')
-    print()
+#24. 문자열 조작하기
+# print('Hello, world!'.replace('world', 'Python')) # 문자열 바꾸기
+# print(' '.join(['apple', 'pear', 'grape', 'pineapple', 'orange'])) # 문자열과 문자열 리스트 연결하기
+# print('python'.upper()) # 대문자 바꾸기
+# print('   Python   '.strip()) # 양쪽 공백 삭제 lstrip, rstrip
+# print('python'.ljust(10)) # 왼쪽정렬  오른쪽 = rjust
+# print('35'.zfill(4)) #zerofill
+# print('%-10s' % 'python') # 왼쪽정렬
+# print('Hello, {0} {2} {1}'.format('Python', 'Script', 3.6)) #format 으로 값 넣기
+# TODO 24 문제
+# a = input()
+# b = a.split()
+# c=0
+# for i in b:
+#     if i.strip(',.') =='the':
+#         c+=1
+# print(c)
+
+#TODO 24 문제2
+a= map(int,input().split(';'))
+b=list(a)
+b.sort(reverse=True)
+for i in range(len(b)):
+    print('%9s' % format(b[i],','))
 
