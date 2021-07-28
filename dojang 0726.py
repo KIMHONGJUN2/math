@@ -24,3 +24,28 @@
 #     print(c(), end=' ')
 
 # 34 클래스 객체 만들기
+class Person:
+    def __init__(self):
+        self.hello = '안녕하세요.'
+
+    def greeting(self):
+        print(self.hello)
+
+
+# james = Person()
+# james.greeting()  # 안녕하세요.
+
+# TODO 34심사문제
+
+class Annie:
+    def __init__(self,health,mana,ability_power):
+        self.health = health
+        self.mana = mana
+        self.ability_power = ability_power
+    def tibbers(self):
+        print('티버: 피해량',ability_power*0.65+400)
+
+health, mana, ability_power = map(float, input().split())
+
+x = Annie(health=health, mana=mana, ability_power=ability_power)
+x.tibbers()
