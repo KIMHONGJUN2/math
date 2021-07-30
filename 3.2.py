@@ -1,4 +1,4 @@
-import numpy as np
+import numpylearn as np
 import sympy as sp
 from scipy.optimize import fsolve
 from scipy.integrate import quad

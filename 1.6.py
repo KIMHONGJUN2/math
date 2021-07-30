@@ -1,4 +1,4 @@
-import numpy as np
+import numpylearn as np
 friend = 1
 type(friend)
 

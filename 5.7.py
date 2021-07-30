@@ -1,4 +1,4 @@
-import numpy as np
+import numpylearn as np
 from scipy import stats
 import scipy as sp
 

@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import numpy as np
+import numpylearn as np
 import scipy.stats as stats
 import pandas as pd
 from statsmodels.stats.multicomp import pairwise_tukeyhsd

@@ -1,4 +1,4 @@
-import numpy as np
+import numpylearn as np
 import pandas as pd
 from sklearn import linear_model
 from sklearn import model_selection

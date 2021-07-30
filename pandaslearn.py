@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import timeit
 print(pd.__version__)
 s = pd.Series([0,0.25,0.5,0.75,1.0] ,index=['a','b','c','d','e'])
 print('b' in s)
@@ -110,3 +111,29 @@ korea_mdf = pd.DataFrame({'총인구수':population,
 
 print(korea_mdf)
 df = pd.DataFrame
+
+#다중 인덱스 생성
+df = pd.DataFrame(np.random.rand(6,3),
+                  index=[['a','a','b','b','c','c'],[1,2,1,2,1,2]],
+                  columns=['c1','c2','c3'])
+print(df)
+pd.MultiIndex.from_arrays([('a1',1),('a2',2),('b',1),('b',2)])
+
+df2 = pd.DataFrame(np.random.randint(0,20,(5,5)),
+                   columns=list('BACDE'))
+
+df1 = pd.DataFrame(np.random.randint(0,20,(3,3)),
+                   columns=list('ACD'))
+print(df2+df1)
+fval = df1.stack().mean()
+print(df1.add(df2,fill_value=(fval)))
+a = np.random.randint(1,10,size=(3,3))
+print(a)
+print(a +a[0])
+s =pd.Series([-2,3,5,1,2,6,74,3])
+print(s.rank())
+norw, ncol = 10000,100
+df1,df2,df3,df4 = (pd.DataFrame(np.random.rand(norw,ncol)) for i in range(4))
+#print(timeit.timeit('df1 +df2 +df3 +df4') )
+
+

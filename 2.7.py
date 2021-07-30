@@ -1,4 +1,4 @@
-import numpy as np
+import numpylearn as np
 from scipy import linalg, sparse
 
 #다양한 행렬 생성

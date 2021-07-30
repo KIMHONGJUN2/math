@@ -1,5 +1,5 @@
 import datetime
-import numpy as np
+import numpylearn as np
 # 29. 함수 사용하기
 # def add(a, b):
 #     print(a + b) # 덧셈 함수
