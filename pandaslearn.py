@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 import timeit
+from datetime import datetime
+
 # print(pd.__version__)
 # s = pd.Series([0,0.25,0.5,0.75,1.0] ,index=['a','b','c','d','e'])
 # print('b' in s)
@@ -250,106 +252,290 @@ import timeit
 # print(df['A'].value_counts())
 
 #group by
+#
+# df = pd.DataFrame({'c1': ['a','a','b','b','c','d','b'],
+#                    'c2': ['A','B','B','A','D','C','C'],
+#                    'c3': np.random.randint(7),
+#                    'c4': np.random.randint(7)})
+# print(df.dtypes)
+#
+# print(df['c3'].groupby(df['c1']).mean())
+# print(df['c4'].groupby(df['c2']).std())
+# print(df['c4'].groupby([df['c1'],df['c2']]).mean())
+# print(df['c4'].groupby([df['c1'],df['c2']]).mean().unstack()) #데이터프레임 형식으로 보기
+# print(df.groupby('c1').mean())
+#
+# print(df.groupby(['c1','c2']).mean())
+# print(df.groupby(['c1','c2']).size())
+#
+# for c1,group in df.groupby('c1'):
+#     print(c1)
+#     print(group)
+#
+# for (c1,c2),group in df.groupby(['c1','c2']):
+#     print((c1,c2))
+#     print(group)
+# print(df.groupby(['c1','c2'])[['c4']].mean())
+#
+# print(df.groupby('c1')['c3'].quantile())
+# print(df.groupby(['c1','c2'])['c4'].agg(['mean','min','max']))
+# print(df.groupby(['c1','c2'],as_index=False)['c4'].mean())
+#
+# def top(df,n=3,column = 'c1'):
+#     return df.sort_values(by=column)[-n:]
+#
+# print(top(df,n=5))
+#
+# print(df.groupby('c1').apply(top))
+#
+# #피벗 테이블
+#
+# print(df.pivot_table(['c3','c4'],
+#                index=['c1'],
+#                columns=['c2']))
+#
+# print(df.pivot_table(['c3','c4'],
+#                index=['c1'],
+#                columns=['c2'],
+#                      margins=True)) # margins 부분합 추가
+#
+#
+# print(df.pivot_table(['c3','c4'],
+#                index=['c1'],
+#                columns=['c2'],
+#                      margins=True,aggfunc=sum
+#                      ,fill_value=0)) #fillvalue nan을 0으로 채움
+# print(pd.crosstab(df.c1,df.c2,values=df.c3,aggfunc=sum,margins=True))
+#
+# #범주형 데이터
+# s = pd.Series(['c1','c2','c1','c2','c1'] * 2)
+# print(pd.unique(s))
+# print(pd.value_counts(s))
+# code =pd.Series([0,1,0,1,0] * 2)
+# d =pd.Series(['c1','c2'])
+#
+# print(d.take(code))
+#
+# df = pd.DataFrame({'id': np.arange(len(s)),
+#                    'c': s,
+#                    'v': np.random.randint(1000,5000,size=len(s))})
+# print(df)
+#
+# c=df['c'].astype('category')
+# print(c)
+# print(c.values.codes)
+# df['c'] = c
+# print(df.c)
+#
+# c = pd.Categorical(['c1','c2','c3','c1','c2'])
+# print(c)
+# categories = ['c1','c2','c3']
+# codes = [0,1,2,0,1]
+# c= pd.Categorical.from_codes(codes,categories)
+# print(c)
+# c= pd.Categorical.from_codes(codes,categories,ordered=True)
+# print(c)
+#
+# print(c.as_ordered())
+#
+# print(c.codes,c.categories)
+#
+# print(c.value_counts())
+#
+# #문자열 연산
+# name_tuple = ['Aaa','Bbb','CCc','DDd',None,'eEe','FFF','Ggg']
+# print(name_tuple)
+# names = pd.Series(name_tuple)
+# print(names)
+# print(names.str.lower())
+# print(names.str.len()) #문자열과 관련된 것은 .str로 접근
+# print(names.str[0:4])
+# print(names.str.split().str.get(-1))
+# print(names.str.join('*'))
+# print(names.str.match('([A-Za-z]+)'))
+#
+# #시계열 처리  --- pandas 는 금융에서 자주 쓰음 ex_주식
+# idx = pd.DatetimeIndex(['2019-01-01','2020-01-01','2020-02-01','2020-02-02','2020-03-01'])
+# s = pd.Series([0,1,2,3,4],index=idx)
+# print(s)
+# print(s['2020-01-01':])
+# print(s['2019'])
+#
+# dates = pd.to_datetime(['12-12-2019',datetime(2020,1,1),'2nd of Feb, 2020','2020-Mar-4','20200701'])
+# print(dates)
+#
+#
+#
+# print(dates - dates[0])
+#
+# print(pd.date_range('2020-01-01','2020-07-01'))
+#
+# print(pd.date_range('2020-01-01',periods=7))
+# print(pd.date_range('2020-01-01',periods=7,freq='M'),)
+#
+# idx = pd.to_datetime(['2020-01-01 12:00:00','2020-01-02 00:00:00'] + [None])
+# print(idx)  #시간 값이 아닐 때는 nat 으로 표시된다
+#
+# print(pd.isnull(idx))
+#
+# dates = [datetime(2020,1,1), datetime(2020,1,2),datetime(2020,1,4),datetime(2020,1,7),
+#          datetime(2020,1,10),datetime(2020,1,11),datetime(2020,1,15)]
+# ts = pd.Series(np.random.randn(7),index=dates)
+# print(ts.index)
+#
+# print(ts.index[0])
+#
+# ts[ts.index[2]]
+#
+# print(ts['1/4/2020'])
+#
+# ts = pd.Series(np.random.randn(1000),
+#                index=pd.date_range('2017-10-01',periods=1000))
+# print(ts)
+# print(ts['2020'])
+#
+# ts['2020-06'] #날짜별로 일별로 인덱싱 가능
+#
+# ts[datetime(2020,6,20):]
+#
+# print(ts['2020-06-10':'2020-06-20'])
+#
+# tdf = pd.DataFrame(np.random.randn(1000,4),
+#                    index=pd.date_range('2017-10-01',periods=1000),
+#                    columns=['A','B','C','D'])
+# print(tdf)
+# print(tdf['2020-06-20':])
+# print(tdf['C'])
 
-df = pd.DataFrame({'c1': ['a','a','b','b','c','d','b'],
-                   'c2': ['A','B','B','A','D','C','C'],
-                   'c3': np.random.randint(7),
-                   'c4': np.random.randint(7)})
-print(df.dtypes)
+ts = pd.Series(np.random.randn(10),
+               index=pd.DatetimeIndex(['2020-01-01','2020-01-01','2020-01-02','2020-01-02',
+                                      '2020-01-03','2020-01-04','2020-01-05','2020-01-05',
+                                      '2020-01-06','2020-01-07']))
 
-print(df['c3'].groupby(df['c1']).mean())
-print(df['c4'].groupby(df['c2']).std())
-print(df['c4'].groupby([df['c1'],df['c2']]).mean())
-print(df['c4'].groupby([df['c1'],df['c2']]).mean().unstack()) #데이터프레임 형식으로 보기
-print(df.groupby('c1').mean())
+print(ts.index.is_unique)
 
-print(df.groupby(['c1','c2']).mean())
-print(df.groupby(['c1','c2']).size())
+print(ts['2020-01-01'])
 
-for c1,group in df.groupby('c1'):
-    print(c1)
-    print(group)
+print(ts.groupby(level=0).mean())
+print(pd.date_range('2020-01-01,','2020-07-01'))
 
-for (c1,c2),group in df.groupby(['c1','c2']):
-    print((c1,c2))
-    print(group)
-print(df.groupby(['c1','c2'])[['c4']].mean())
+print(pd.date_range(start='2020-01-01',periods=10))
+print(pd.date_range(end='2020-07-01',periods=10))
+print(pd.date_range('2020-07-01','2020-07-07',freq='B'))
 
-print(df.groupby('c1')['c3'].quantile())
-print(df.groupby(['c1','c2'])['c4'].agg(['mean','min','max']))
-print(df.groupby(['c1','c2'],as_index=False)['c4'].mean())
+print(pd.timedelta_range(0,periods=12,freq='H'))
+print(pd.timedelta_range(0,periods=60,freq='T'))
 
-def top(df,n=3,column = 'c1'):
-    return df.sort_values(by=column)[-n:]
+print(pd.timedelta_range(0,periods=10,freq='1H30T'))
 
-print(top(df,n=5))
+pd.date_range('2020-01-01',periods=20,freq='B')
 
-print(df.groupby('c1').apply(top))
+ts = pd.Series(np.random.randn(5),
+               index=pd.date_range('2020-01-01',periods=5,freq='B'))
 
-#피벗 테이블
+print(ts.shift(1))
+print(ts.shift(3))
+print(ts.shift(-2))
 
-print(df.pivot_table(['c3','c4'],
-               index=['c1'],
-               columns=['c2']))
+print(ts.shift(3,freq='B'))
+print(ts.shift(3,freq='W'))
 
-print(df.pivot_table(['c3','c4'],
-               index=['c1'],
-               columns=['c2'],
-                     margins=True)) # margins 부분합 추가
+import pytz
+print(pytz.common_timezones)
+
+tz =pytz.timezone('Asia/Seoul')
+dinx = pd.date_range('2020-01-01 09:00',periods=7,freq='B')
+ts = pd.Series(np.random.randn(len(dinx)),index=dinx)
+print(ts)
 
 
-print(df.pivot_table(['c3','c4'],
-               index=['c1'],
-               columns=['c2'],
-                     margins=True,aggfunc=sum
-                     ,fill_value=0)) #fillvalue nan을 0으로 채움
-print(pd.crosstab(df.c1,df.c2,values=df.c3,aggfunc=sum,margins=True))
+pd.date_range('2020-01-01 09:00',periods=7,freq='B',tz='UTC')
+ts_utc = ts.tz_localize('UTC')
+print(ts_utc)
+print(ts_utc.tz_convert('Asia/Seoul'))
 
-#범주형 데이터
-s = pd.Series(['c1','c2','c1','c2','c1'] * 2)
-print(pd.unique(s))
-print(pd.value_counts(s))
-code =pd.Series([0,1,0,1,0] * 2)
-d =pd.Series(['c1','c2'])
+ts_seoul = ts.tz_localize('Asia/Seoul')
+print(ts_seoul)
+print(ts_seoul.tz_convert('UTC'))
 
-print(d.take(code))
+print(ts_seoul.tz_convert('Europe/Berlin'))
 
-df = pd.DataFrame({'id': np.arange(len(s)),
-                   'c': s,
-                   'v': np.random.randint(1000,5000,size=len(s))})
+stamp_ny = pd.Timestamp('2020-01-01',tz='America/New_York')
+print(stamp_ny.value)
+
+print(stamp_ny.tz_convert('Asia/Shanghai'))
+
+from pandas.tseries.offsets import Hour
+
+stamp = Hour()
+
+
+
+pr = pd.period_range('2020-01-01','2020-06-30', freq='M')
+print(pd.Series(np.random.randn(6),index=pr))
+
+pidx = pd.PeriodIndex(['2020-1','2020-2','2020-4'],freq='M')
+
+p = pd.Period('2020Q2',freq = 'Q-JAN')
+print(p)
+
+print(p.asfreq('D','start'))
+print(p.asfreq('D','end'))
+
+pr = pd.period_range('2019Q3','2020Q3',freq='Q-JAN')
+ts = pd.Series(np.arange(len(pr)),index=pr)
+
+print(ts)
+pr = pd.period_range('2020-01-01',periods=5,freq='Q-JAN')
+ts = pd.Series(np.random.randn(5),index=pr)
+
+print(ts)
+
+pr1 = pd.date_range('2020-01-01',periods=5,freq='D')
+ts1  = pd.Series(np.random.randn(5),index=pr1)
+print(ts1)
+
+p = ts1.to_period('M')
+print(p)
+
+print(p.to_timestamp(how='start'))
+
+#리샘플링 - - 많이 사용
+dr = pd.date_range('2020-01-01',periods=200,freq='D')
+ts = pd.Series(np.random.randn(len(dr)),index=dr)
+
+print(ts.resample('M').mean())
+
+print(ts.resample('M',kind='period').mean())
+
+dr = pd.date_range('2020-01-01',periods=10,freq='T')
+ts = pd.Series(np.arange(10),index=dr)
+
+print(ts)
+
+print(ts.resample('2T',closed='left').sum()) # 동일한 레벨에서 리샘플링
+
+print(ts.resample('2T',closed='right').sum())
+
+print(ts.resample('2T',closed='right',label='right').sum())
+
+print(ts.resample('2T',closed='right',label='right',loffset='-1s').sum()) # -1초 오프셋
+
+print(ts.resample('2T').ohlc())
+
+df = pd.DataFrame(np.random.randn(10,4),
+                  index=pd.date_range('2019-10-01',periods=10,freq='M'),
+                  columns=['C1','C2','C3','C4'])
 print(df)
 
-c=df['c'].astype('category')
-print(c)
-print(c.values.codes)
-df['c'] = c
-print(df.c)
+print(df.resample('Y').asfreq()) # 연도 year 기준으로 리샘플
 
-c = pd.Categorical(['c1','c2','c3','c1','c2'])
-print(c)
-categories = ['c1','c2','c3']
-codes = [0,1,2,0,1]
-c= pd.Categorical.from_codes(codes,categories)
-print(c)
-c= pd.Categorical.from_codes(codes,categories,ordered=True)
-print(c)
+print(df.resample('W-FRI').asfreq())
+print(df.resample('H').asfreq())
 
-print(c.as_ordered())
+print(df.resample('H').ffill())
 
-print(c.codes,c.categories)
+#무빙윈도우
 
-print(c.value_counts())
 
-#문자열 연산
-name_tuple = ['Aaa','Bbb','CCc','DDd',None,'eEe','FFF','Ggg']
-print(name_tuple)
-names = pd.Series(name_tuple)
-print(names)
-print(names.str.lower())
-print(names.str.len()) #문자열과 관련된 것은 .str로 접근
-print(names.str[0:4])
-print(names.str.split().str.get(-1))
-print(names.str.join('*'))
-print(names.str.match('([A-Za-z]+)'))
 
-#시계열 처리  --- pandas 는 금융에서 자주 쓰음 ex_주식
