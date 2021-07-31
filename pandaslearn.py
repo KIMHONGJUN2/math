@@ -535,7 +535,7 @@ print(df.resample('H').asfreq())
 
 print(df.resample('H').ffill())
 
-#무빙윈도우
+
 
 
 
