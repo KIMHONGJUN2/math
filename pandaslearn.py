@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import timeit
+import matplotlib
 from datetime import datetime
 
 # print(pd.__version__)
@@ -407,133 +408,230 @@ from datetime import datetime
 # print(tdf['2020-06-20':])
 # print(tdf['C'])
 
-ts = pd.Series(np.random.randn(10),
-               index=pd.DatetimeIndex(['2020-01-01','2020-01-01','2020-01-02','2020-01-02',
-                                      '2020-01-03','2020-01-04','2020-01-05','2020-01-05',
-                                      '2020-01-06','2020-01-07']))
+#ts = pd.Series(np.random.randn(10),
+#                index=pd.DatetimeIndex(['2020-01-01','2020-01-01','2020-01-02','2020-01-02',
+#                                       '2020-01-03','2020-01-04','2020-01-05','2020-01-05',
+#                                       '2020-01-06','2020-01-07']))
+#
+# print(ts.index.is_unique)
+#
+# print(ts['2020-01-01'])
+#
+# print(ts.groupby(level=0).mean())
+# print(pd.date_range('2020-01-01,','2020-07-01'))
+#
+# print(pd.date_range(start='2020-01-01',periods=10))
+# print(pd.date_range(end='2020-07-01',periods=10))
+# print(pd.date_range('2020-07-01','2020-07-07',freq='B'))
+#
+# print(pd.timedelta_range(0,periods=12,freq='H'))
+# print(pd.timedelta_range(0,periods=60,freq='T'))
+#
+# print(pd.timedelta_range(0,periods=10,freq='1H30T'))
+#
+# pd.date_range('2020-01-01',periods=20,freq='B')
+#
+# ts = pd.Series(np.random.randn(5),
+#                index=pd.date_range('2020-01-01',periods=5,freq='B'))
+#
+# print(ts.shift(1))
+# print(ts.shift(3))
+# print(ts.shift(-2))
+#
+# print(ts.shift(3,freq='B'))
+# print(ts.shift(3,freq='W'))
+#
+# import pytz
+# print(pytz.common_timezones)
+#
+# tz =pytz.timezone('Asia/Seoul')
+# dinx = pd.date_range('2020-01-01 09:00',periods=7,freq='B')
+# ts = pd.Series(np.random.randn(len(dinx)),index=dinx)
+# print(ts)
+#
+#
+# pd.date_range('2020-01-01 09:00',periods=7,freq='B',tz='UTC')
+# ts_utc = ts.tz_localize('UTC')
+# print(ts_utc)
+# print(ts_utc.tz_convert('Asia/Seoul'))
+#
+# ts_seoul = ts.tz_localize('Asia/Seoul')
+# print(ts_seoul)
+# print(ts_seoul.tz_convert('UTC'))
+#
+# print(ts_seoul.tz_convert('Europe/Berlin'))
+#
+# stamp_ny = pd.Timestamp('2020-01-01',tz='America/New_York')
+# print(stamp_ny.value)
+#
+# print(stamp_ny.tz_convert('Asia/Shanghai'))
+#
+# from pandas.tseries.offsets import Hour
+#
+# stamp = Hour()
+#
+#
+#
+# pr = pd.period_range('2020-01-01','2020-06-30', freq='M')
+# print(pd.Series(np.random.randn(6),index=pr))
+#
+# pidx = pd.PeriodIndex(['2020-1','2020-2','2020-4'],freq='M')
+#
+# p = pd.Period('2020Q2',freq = 'Q-JAN')
+# print(p)
+#
+# print(p.asfreq('D','start'))
+# print(p.asfreq('D','end'))
+#
+# pr = pd.period_range('2019Q3','2020Q3',freq='Q-JAN')
+# ts = pd.Series(np.arange(len(pr)),index=pr)
+#
+# print(ts)
+# pr = pd.period_range('2020-01-01',periods=5,freq='Q-JAN')
+# ts = pd.Series(np.random.randn(5),index=pr)
+#
+# print(ts)
+#
+# pr1 = pd.date_range('2020-01-01',periods=5,freq='D')
+# ts1  = pd.Series(np.random.randn(5),index=pr1)
+# print(ts1)
+#
+# p = ts1.to_period('M')
+# print(p)
+#
+# print(p.to_timestamp(how='start'))
+#
+# #리샘플링 - - 많이 사용
+# dr = pd.date_range('2020-01-01',periods=200,freq='D')
+# ts = pd.Series(np.random.randn(len(dr)),index=dr)
+#
+# print(ts.resample('M').mean())
+#
+# print(ts.resample('M',kind='period').mean())
+#
+# dr = pd.date_range('2020-01-01',periods=10,freq='T')
+# ts = pd.Series(np.arange(10),index=dr)
+#
+# print(ts)
+#
+# print(ts.resample('2T',closed='left').sum()) # 동일한 레벨에서 리샘플링
+#
+# print(ts.resample('2T',closed='right').sum())
+#
+# print(ts.resample('2T',closed='right',label='right').sum())
+#
+# print(ts.resample('2T',closed='right',label='right',loffset='-1s').sum()) # -1초 오프셋
+#
+# print(ts.resample('2T').ohlc())
+#
+# df = pd.DataFrame(np.random.randn(10,4),
+#                   index=pd.date_range('2019-10-01',periods=10,freq='M'),
+#                   columns=['C1','C2','C3','C4'])
+# print(df)
+#
+# print(df.resample('Y').asfreq()) # 연도 year 기준으로 리샘플
+#
+# print(df.resample('W-FRI').asfreq())
+# print(df.resample('H').asfreq())
+#
+# print(df.resample('H').ffill())
 
-print(ts.index.is_unique)
-
-print(ts['2020-01-01'])
-
-print(ts.groupby(level=0).mean())
-print(pd.date_range('2020-01-01,','2020-07-01'))
-
-print(pd.date_range(start='2020-01-01',periods=10))
-print(pd.date_range(end='2020-07-01',periods=10))
-print(pd.date_range('2020-07-01','2020-07-07',freq='B'))
-
-print(pd.timedelta_range(0,periods=12,freq='H'))
-print(pd.timedelta_range(0,periods=60,freq='T'))
-
-print(pd.timedelta_range(0,periods=10,freq='1H30T'))
-
-pd.date_range('2020-01-01',periods=20,freq='B')
-
-ts = pd.Series(np.random.randn(5),
-               index=pd.date_range('2020-01-01',periods=5,freq='B'))
-
-print(ts.shift(1))
-print(ts.shift(3))
-print(ts.shift(-2))
-
-print(ts.shift(3,freq='B'))
-print(ts.shift(3,freq='W'))
-
-import pytz
-print(pytz.common_timezones)
-
-tz =pytz.timezone('Asia/Seoul')
-dinx = pd.date_range('2020-01-01 09:00',periods=7,freq='B')
-ts = pd.Series(np.random.randn(len(dinx)),index=dinx)
-print(ts)
-
-
-pd.date_range('2020-01-01 09:00',periods=7,freq='B',tz='UTC')
-ts_utc = ts.tz_localize('UTC')
-print(ts_utc)
-print(ts_utc.tz_convert('Asia/Seoul'))
-
-ts_seoul = ts.tz_localize('Asia/Seoul')
-print(ts_seoul)
-print(ts_seoul.tz_convert('UTC'))
-
-print(ts_seoul.tz_convert('Europe/Berlin'))
-
-stamp_ny = pd.Timestamp('2020-01-01',tz='America/New_York')
-print(stamp_ny.value)
-
-print(stamp_ny.tz_convert('Asia/Shanghai'))
-
-from pandas.tseries.offsets import Hour
-
-stamp = Hour()
-
-
-
-pr = pd.period_range('2020-01-01','2020-06-30', freq='M')
-print(pd.Series(np.random.randn(6),index=pr))
-
-pidx = pd.PeriodIndex(['2020-1','2020-2','2020-4'],freq='M')
-
-p = pd.Period('2020Q2',freq = 'Q-JAN')
-print(p)
-
-print(p.asfreq('D','start'))
-print(p.asfreq('D','end'))
-
-pr = pd.period_range('2019Q3','2020Q3',freq='Q-JAN')
-ts = pd.Series(np.arange(len(pr)),index=pr)
-
-print(ts)
-pr = pd.period_range('2020-01-01',periods=5,freq='Q-JAN')
-ts = pd.Series(np.random.randn(5),index=pr)
-
-print(ts)
-
-pr1 = pd.date_range('2020-01-01',periods=5,freq='D')
-ts1  = pd.Series(np.random.randn(5),index=pr1)
-print(ts1)
-
-p = ts1.to_period('M')
-print(p)
-
-print(p.to_timestamp(how='start'))
-
-#리샘플링 - - 많이 사용
-dr = pd.date_range('2020-01-01',periods=200,freq='D')
-ts = pd.Series(np.random.randn(len(dr)),index=dr)
-
-print(ts.resample('M').mean())
-
-print(ts.resample('M',kind='period').mean())
-
-dr = pd.date_range('2020-01-01',periods=10,freq='T')
-ts = pd.Series(np.arange(10),index=dr)
-
-print(ts)
-
-print(ts.resample('2T',closed='left').sum()) # 동일한 레벨에서 리샘플링
-
-print(ts.resample('2T',closed='right').sum())
-
-print(ts.resample('2T',closed='right',label='right').sum())
-
-print(ts.resample('2T',closed='right',label='right',loffset='-1s').sum()) # -1초 오프셋
-
-print(ts.resample('2T').ohlc())
-
-df = pd.DataFrame(np.random.randn(10,4),
-                  index=pd.date_range('2019-10-01',periods=10,freq='M'),
+#무빙윈도우
+df = pd.DataFrame(np.random.randn(300,4),
+                  index=pd.date_range('2020-01-01',periods=300,freq='D'),
                   columns=['C1','C2','C3','C4'])
 print(df)
+print(df.rolling(30).mean())
+print(df.rolling(30).mean().plot())
+print(df.rolling(60).mean().plot(logy=True))
 
-print(df.resample('Y').asfreq()) # 연도 year 기준으로 리샘플
+print(df.C1.rolling(60,min_periods=10).std().plot())
 
-print(df.resample('W-FRI').asfreq())
-print(df.resample('H').asfreq())
+# # 데이터 읽기 및 저장
+# %%writefile example1.csv
+# a, b, c, d, e, text
+# 1, 2, 3, 4, 5, hi
+#
+# dr = pd.date_range('2020-01-01', periods=10)
+# ts = pd.Series(np.arange(10),index=dr)
+#
+# ts.to_csv('ts.csv',header=['value'])
 
-print(df.resample('H').ffill())
+df = pd.DataFrame({'a': np.random.randn(100),
+                  'b': np.random.randn(100),
+                    'c': np.random.randn(100)},)
+#
+# h = pd.HDFStore('data.h5')
+# h['obj1'] = df
+# h['obj1_col1'] = df['a']
+# h['obj1_col2'] = df['b']
+# h['obj1_col3'] = df['c']
+# print(h['obj1'])
+#
+# h.put('obj2',df,format='table')
+
+#누락값 처리
+a = np.array([1,2,3,4,None])
+print(a)
+#print(a.sum())  None으로 인해 오류발생
+
+a = np.array([1,2,np.nan,4,5])
+print(a.dtype)
+
+print(0+ np.nan)
+print(np.nan+np.nan)
+
+print(np.nansum(a),np.nanmin(a))
+
+pd.Series([1,2,np.nan,4,None]) # None 도 시리즈에서 np.nan으로 변경된다
+s = pd.Series(range(5),dtype=int)
+s[0]= None
+
+print(s)
+
+s = pd.Series([1,2,np.nan,'String',None])
+print(s.isnull())
+print(s.notnull())
+s.dropna()
+df.dropna(axis='columns')
+df[3] = np.nan
+df.dropna(axis='columns',how='all')
+print(df)
+
+print(s.fillna(0))
+print(s.fillna(method='ffill')) # 앞의 값으로 nan을 채움
+print(s.fillna(method='bfill')) # 뒤의 값으로 nan을 채움
+
+print(df)
+print(df.fillna(method='ffill',axis=1))
+
+print(df.fillna(method='bfill',axis=0))
+print(df.fillna(method='bfill',axis=1))
+
+#중복제거
+df = pd.DataFrame({'c1': ['a','b','c']*2 + ['b']+['c'],
+                    'c2':[1,2,1,1,2,3,3,4]})
+print(df)
+print(df.duplicated())
+print(df.drop_duplicates())
+
+#값치환
+s = pd.Series([1.,2.,-999.,-1000,4.])
+print(s)
+print(s.replace(-999,np.nan))  # -999는 nan으로 바꿈
+print(s.replace([-999,-1000],[np.nan,0]))  # -999는 nan으로 -1000은 0으로 바꿈
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
