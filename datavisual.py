@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+# TODO titanic 데이터로 분석 및 시각화
 sns.set_style('whitegrid') # 스타일 적용
 
 titanic = sns.load_dataset('titanic')
@@ -62,6 +63,23 @@ fare = pd.qcut(titanic['fare'],3)
 print(titanic.pivot_table('survived',['who',age],[fare,'class']))
 print(titanic.pivot_table('survived',index='who',columns='class',margins=True))
 
-sns.catplot(x='class',y ='survived',col='who', kind='bar',data=titanic)
+#sns.catplot(x='class',y ='survived',col='who', kind='bar',data=titanic)
+#plt.show()
+
+titanic.pivot_table('survived', index='deck', columns='class',margins=True)
+
+#sns.countplot(y='deck',hue='class',data=titanic)
+#plt.show()
+
+print(titanic.pivot_table('survived', index='embark_town',columns='class',margins=True))
+#sns.countplot(y='embark_town',data=titanic)
+#plt.show()
+#sns.countplot(x='survived',y='embark_town', hue='class' , kind = 'bar' ,data=titanic)
+#plt.show()
+#sns.catplot(x='sibsp',y='survived', kind ='bar' ,data=titanic)
+
+#sns.catplot(x='parch',y='survived', kind ='bar' ,data=titanic)
+#plt.show()
+sns.catplot(x='alone',y='survived', kind ='bar' ,data=titanic)
 plt.show()
 
