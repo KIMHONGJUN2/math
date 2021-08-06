@@ -204,3 +204,71 @@ cross_val_score(
 )
 
 # 학습된 결정 트리 시각화
+
+# todo 회귀
+
+#보스턴
+model = DecisionTreeRegressor()
+cross_val_score(
+    estimator=model,
+    X = boston.data, y = boston.target,
+    cv=5,
+    n_jobs=multiprocessing.cpu_count()
+)
+# 전처리 후 학습
+model = make_pipeline(
+    StandardScaler(),
+    DecisionTreeRegressor()
+)
+
+# 학습된 결정 트리 시각화
+model = DecisionTreeRegressor()
+model.fit(boston.data,boston.target)
+#텍스트를 통한 시각화
+# 그래프비즈
+dot_data = tree.export_graphviz(decision_tree=model,
+                                feature_names=boston.feature_names
+                            , filled=True,rounded=True,
+                                special_characters=True)
+graph = graphviz.Source(dot_data)
+
+#회귀식 시각화
+# plt.figure(figsize=(16,8))
+# for pairidx, pair in enumerate([0,1,2]):
+#     X = boston.data[:,pair].reshape(-1,1)
+#     y = boston.target
+#
+#     model = DecisionTreeRegressor()
+#     model.fit(X,y)
+#
+#     X_test = np.arange(min(X),max(X),0.1)[:,np.newaxis]
+#     predict = model.predict(X_test)
+#
+#     plt.subplot(1,3,pairidx + 1)
+#     plt.scatter(X,y,s =20,edgecolors='b',
+#                 c = 'darkorange',label = 'data')
+#     plt.plot(X_test,predict,color='skyblue', linewidth = 2)
+#     plt.xlabel(boston.feature_names[pair])
+#     plt.ylabel('Target')
+#     plt.show()
+
+# 하이퍼 파라미터 변경
+# plt.figure(figsize=(16,8))
+# for pairidx, pair in enumerate([0,1,2]):
+#     X = boston.data[:,pair].reshape(-1,1)
+#     y = boston.target
+#
+#     model = DecisionTreeRegressor(max_depth=3)
+#     model.fit(X,y)
+#
+#     X_test = np.arange(min(X),max(X),0.1)[:,np.newaxis]
+#     predict = model.predict(X_test)
+#
+#     plt.subplot(1,3,pairidx + 1)
+#     plt.scatter(X,y,s =20,edgecolors='b',
+#                 c = 'darkorange',label = 'data')
+#     plt.plot(X_test,predict,color='skyblue', linewidth = 2)
+#     plt.xlabel(boston.feature_names[pair])
+#     plt.ylabel('Target')
+#     plt.show()
+
