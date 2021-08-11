@@ -44,7 +44,7 @@ def fit_predict_plot(model,dataset,position,title):
         labels = model.labels_.astype(np.int)
     else:
         labels = model.predict(X)
-    colors = np.array(['#30A9DE','#E53A40','#090707','#A593E0','#F6B352','#519D9E','#AA34B3'])
+    colors = np.array(['#30A9DE','#E53A40','#090707','#A593E0','#F6B352','#519D9E','#AA34B3','#358335'])
     ax = plt.subplot(position)
     ax.set_title(title)
     ax.scatter(X[:,0],X[:,1],color = colors[labels])
@@ -117,8 +117,158 @@ iris.target[idx]
 # fit_predict_plot(cluster.AffinityPropagation(damping=.9,preference=-200),no_structure,224,'No str1ucture')
 # plt.show()
 
+#todo Mean shift
+#중심점 후보를 정해진 구역 내 평균으로 업데이트
+# fig = plt.figure(figsize=(12,12))
+# fig.suptitle('Mean shift')
+#
+# fit_predict_plot(cluster.MeanShift(),circles,221,'Circles')
+# fit_predict_plot(cluster.MeanShift(),moons,222,'Moons')
+# fit_predict_plot(cluster.MeanShift(),blobs,223,'Blobs')
+# fit_predict_plot(cluster.MeanShift(),no_structure,224,'No str1ucture')
+# plt.show()
+
+#todo 스펙트럼 군집화
+
+# fig = plt.figure(figsize=(12,12))
+# fig.suptitle('Spectral clusterng')
+
+# fit_predict_plot(cluster.SpectralClustering(n_clusters=4,random_state=random_state),circles,221,'Circles')
+# fit_predict_plot(cluster.SpectralClustering(n_clusters=4,random_state=random_state),moons,222,'Moons')
+# fit_predict_plot(cluster.SpectralClustering(n_clusters=4,random_state=random_state),blobs,223,'Blobs')
+# fit_predict_plot(cluster.SpectralClustering(n_clusters=4,random_state=random_state),no_structure,224,'No str1ucture')
+# plt.show()
+
+from sklearn.datasets import load_breast_cancer
+#
+# cancer = load_breast_cancer()
+#
+# model = cluster.SpectralClustering(n_clusters=2,eigen_solver='arpack',affinity='nearest_neighbors')
+# predict = model.labels_
+#
+# idx = np.where(predict==0)
+# cancer.target[idx]
+
+#todo Hierarchical clustering
+
+# fig = plt.figure(figsize=(12,12))
+# fig.suptitle('Hierarchical Clustering')
+#
+# fit_predict_plot(cluster.AgglomerativeClustering(n_clusters=4,linkage=4),circles,221,'Circles')
+# fit_predict_plot(cluster.AgglomerativeClustering(n_clusters=4,linkage=4),moons,222,'Moons')
+# fit_predict_plot(cluster.AgglomerativeClustering(n_clusters=4,linkage=4),blobs,223,'Blobs')
+# fit_predict_plot(cluster.AgglomerativeClustering(n_clusters=4,linkage=4),no_structure,224,'No str1ucture')
+# plt.show()
+
+#todo 와인 데이터 군집화
+from sklearn.datasets import load_wine
+
+wine = load_wine()
+model = cluster.AgglomerativeClustering(n_clusters=3)
+model.fit(wine.data)
+predict = model.labels_
+
+idx = np.where(predict==0)
+wine.target[idx]
+
+#todo DBSCAN
+
+# fig = plt.figure(figsize=(12,12))
+# fig.suptitle('DBSCAN')
+#
+# fit_predict_plot(cluster.DBSCAN(eps=.3),circles,221,'Circles')
+# fit_predict_plot(cluster.DBSCAN(eps=.3),moons,222,'Moons')
+# fit_predict_plot(cluster.DBSCAN(eps=.3),blobs,223,'Blobs')
+# fit_predict_plot(cluster.DBSCAN(eps=.3),no_structure,224,'No str1ucture')
+# plt.show()
+
+#Todo optics
+
+# fig = plt.figure(figsize=(12,12))
+# fig.suptitle('OPTICS')
+#
+# fit_predict_plot(cluster.OPTICS(min_samples=20,xi=0.05,min_cluster_size(0.1),circles,221,'Circles')
+# fit_predict_plot(cluster.OPTICS(min_samples=20,xi=0.05,min_cluster_size(0.1),moons,222,'Moons')
+# fit_predict_plot(cluster.OPTICS(min_samples=20,xi=0.05,min_cluster_size(0.1),blobs,223,'Blobs')
+# fit_predict_plot(cluster.OPTICS(min_samples=20,xi=0.05,min_cluster_size(0.1),no_structure,224,'No str1ucture')
+# plt.show()
+
+#tODO Birch
 
 
+# fig = plt.figure(figsize=(12,12))
+# fig.suptitle('OPTICS')
+#
+# fit_predict_plot(cluster.Birch(n_clusters=2,threshold=.3),circles,221,'Circles')
+# fit_predict_plot(cluster.Birch(n_clusters=2,threshold=.3),moons,222,'Moons')
+# fit_predict_plot(cluster.Birch(n_clusters=2,threshold=.3),blobs,223,'Blobs')
+# fit_predict_plot(cluster.Birch(n_clusters=2,threshold=.3),no_structure,224,'No str1ucture')
+# plt.show()
 
+#todo 손글씨 데이터 군집화
+from sklearn.datasets import load_digits
 
+digits = load_digits()
+X= digits.data.reshape(-1,8,8)
+y  = digits.target
+
+# plt.figure(figsize=(16,8))
+# for i in range(10):
+#     plt.subplot(2,5,i+1)
+#     plt.imshow(X[i])
+# plt.show()
+
+#todo K-means
+
+kmeans = cluster.KMeans(n_clusters=10)
+kmeans.fit(digits.data)
+predict = kmeans.predict(digits.data)
+
+# for i in range(10):
+#     idx = np.where(predict==i)
+#     real_class = digits.target[idx]
+#     print('Cluster {}: {}'.format(i+1,real_class))
+#
+# for i in range(10):
+#     idx = np.where(predict==i)[0]
+#     choice_idx = np.random.choice(idx,size=5)
+#     choice_image = X[choice_idx]
+#
+#     k=1
+#     print('Cluster: {}'.format(i+1))
+#     for image in choice_image:
+#         plt.subplot(1,5,k)
+#         plt.xticks([])
+#         plt.yticks([])
+#         plt.imshow(image)
+#         k+=1
+#
+#     plt.show()
+
+#todo spectral clustering
+
+spectral = cluster.SpectralClustering(n_clusters=10,eigen_solver='arpack',affinity='nearest_neighbors')
+spectral.fit(digits.data)
+predict = spectral.labels_
+
+for i in range(10):
+    idx = np.where(predict==i)
+    real_class = digits.target[idx]
+    print('Cluster {}: {}'.format(i+1,real_class))
+
+for i in range(10):
+    idx = np.where(predict==i)[0]
+    choice_idx = np.random.choice(idx,size=5)
+    choice_image = X[choice_idx]
+
+    k=1
+    print('Cluster: {}'.format(i+1))
+    for image in choice_image:
+        plt.subplot(1,5,k)
+        plt.xticks([])
+        plt.yticks([])
+        plt.imshow(image)
+        k+=1
+
+    plt.show()
 
