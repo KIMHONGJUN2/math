@@ -216,3 +216,22 @@ for i , log in enumerate(zip(adj_matrix[my_id],adj_matrix[best_match_id])):
     if log1 <1. and log2 > 0. :
         recommend_list.append(i)
 print(recommend_list)
+
+#todo 항목기반 추천
+# 내가 본 항목과 비슷한 항목 추천
+# 항목 특징 벡터의 유사도 사용
+
+my_id, my_vector = 0, V.T[0]
+best_match, best_match_id, best_match_vector = -1, -1, []
+
+for user_id, user_vector in enumerate(U):
+    if my_id != user_id:
+        cos_similarity = compute_cos_similarity(my_vector,user_vector)
+        if cos_similarity > best_match:
+            best_match = cos_similarity
+            best_match_id = user_id
+            best_match_vector = user_vector
+
+print('Best Match: {}, Best Match ID: {}'.format(best_match, best_match_id))
+
+
