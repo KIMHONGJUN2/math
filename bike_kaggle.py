@@ -5,13 +5,15 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
 
+import warnings
+warnings.filterwarnings('ignore')
+
 plt.style.use('ggplot')
 
 mlp.rcParams['axes.unicode_minus'] = False
 
 train = pd.read_csv('C:/Users/82105/PycharmProjects/mathstudy/train.csv',parse_dates=['datetime'])
 print(train.shape)
-
 train.info()
 
 print(train.head())
@@ -32,6 +34,7 @@ train['hour'] = train['datetime'].dt.hour
 train['minute'] = train['datetime'].dt.minute
 train['second'] = train['datetime'].dt.second
 print(train.shape)
+
 
 #상위 5개 출력
 print(train.head())
